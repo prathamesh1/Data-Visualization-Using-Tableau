@@ -1,0 +1,1399 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<workbook source-platform='win' version='9.0' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <!-- build 9000.15.0820.1222                                -->
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Sheet2 (Oil Analysis Data)' inline='true' name='excel-direct.42295.006379710649' version='9.0'>
+      <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='F:\College Data\Excel Databases\Oil Analysis Data.xlsx' password='' server='' username='' validate='no'>
+        <relation name='Sheet2$' table='[Sheet2$]' type='table'>
+          <columns header='yes' outcome='2'>
+            <column datatype='date' name='Date' ordinal='0' />
+            <column datatype='real' name='Cushing, OK WTI Spot Price FOB (Dollars per Barrel)' ordinal='1' />
+            <column datatype='real' name='Europe Brent Spot Price FOB (Dollars per Barrel)' ordinal='2' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[Sheet2$]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Cushing, OK WTI Spot Price FOB (Dollars per Barrel)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]</local-name>
+            <parent-name>[Sheet2$]</parent-name>
+            <remote-alias>Cushing, OK WTI Spot Price FOB (Dollars per Barrel)</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Europe Brent Spot Price FOB (Dollars per Barrel)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Europe Brent Spot Price FOB (Dollars per Barrel)]</local-name>
+            <parent-name>[Sheet2$]</parent-name>
+            <remote-alias>Europe Brent Spot Price FOB (Dollars per Barrel)</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name></remote-name>
+            <remote-type>0</remote-type>
+            <parent-name>[Sheet2$]</parent-name>
+            <remote-alias></remote-alias>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Moving Range' datatype='real' name='[Calculation1]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='ABS(ZN(SUM([Europe Brent Spot Price FOB (Dollars per Barrel)])) - LOOKUP(ZN(SUM([Europe Brent Spot Price FOB (Dollars per Barrel)])), -1))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Quick Moving Range' datatype='real' name='[Calculation2]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='ABS(ZN(SUM([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) - LOOKUP(ZN(SUM([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])), -1))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='MR_Signals' datatype='string' name='[Calculation_0441018011056681]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Moving Range Chart Signals Equation: &#13;&#10;IF  &#13;&#10;[Calculation1] &gt; 3.267*(WINDOW_AVG([Calculation1]))&#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&gt;LOOKUP([Calculation1],-1) AND  &#13;&#10;LOOKUP([Calculation1],-1)&gt;LOOKUP([Calculation1],-2)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-2)&gt;LOOKUP([Calculation1],-3)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-3)&gt;LOOKUP([Calculation1],-4)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-4)&gt;LOOKUP([Calculation1],-5)&#13;&#10;  AND &#13;&#10;LOOKUP([Calculation1],-5)&gt;LOOKUP([Calculation1],-6)&#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&lt;LOOKUP([Calculation1],-1) AND  &#13;&#10;LOOKUP([Calculation1],-1)&lt;LOOKUP([Calculation1],-2)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-2)&lt;LOOKUP([Calculation1],-3)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-3)&lt;LOOKUP([Calculation1],-4)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-4)&lt;LOOKUP([Calculation1],-5)&#13;&#10; AND &#13;&#10;LOOKUP([Calculation1],-5)&lt;LOOKUP([Calculation1],-6)&#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&gt;WINDOW_AVG([Calculation1]) AND  &#13;&#10;LOOKUP([Calculation1],-1)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-2)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-3)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;LOOKUP([Calculation1],-4)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-5)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-6)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-7)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-8)&gt;WINDOW_AVG([Calculation1]&#13;&#10;)  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&lt;WINDOW_AVG([Calculation1]) AND  &#13;&#10;LOOKUP([Calculation1],-1)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-2)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-3)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-4)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-5)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-6)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-7)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-8)&lt;WINDOW_AVG([Calculation1]&#13;&#10;)  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Signals' datatype='string' name='[Calculation_1611018005424789]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Individuals Chart Signals Equation: &#13;&#10;IF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;(WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]))+3*(WINDOW_AVG([Calculation1]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;(WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]))-&#13;&#10;3*(WINDOW_AVG([Calculation1]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-7)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-8)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-7)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-8)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='UCL' datatype='real' name='[Calculation_2191018004454508]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Europe Brent Spot Price FOB (Dollars per Barrel)]) + 3*WINDOW_AVG([Calculation1]) / 1.128'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='MR_UCL' datatype='real' name='[Calculation_3291018004406993]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='3.267*WINDOW_AVG([Calculation1])'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='LCL' datatype='real' name='[Calculation_4131018004607477]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Europe Brent Spot Price FOB (Dollars per Barrel)]) - 3*WINDOW_AVG([Calculation1]) / 1.128'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Quick Signals' datatype='string' name='[Calculation_6751018185121103]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Individuals Chart Signals Equation: &#13;&#10;IF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;(WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))+3*(WINDOW_AVG([Calculation2]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;(WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))-&#13;&#10;3*(WINDOW_AVG([Calculation2]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-7)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-8)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-7)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-8)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.315217' measure-ordering='alphabetic' measure-percentage='0.641304' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Crude Oil Price Variation Control Chart'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontname='Arial' fontsize='14'>Variation Of Europe Brent Crude Oil Spot Prices F.O.B.(Dollars Per Barrel) Per Quarter (1986-2015)</run>
+            <run fontname='Arial'>&#10;Based on US Energy Information Administration Data 2015</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run bold='true' fontsize='10'>Finding:</run>
+            <run> Control chart illustrate that up to 2004 Europe Brent Crude oil F.O.B(Free on board) prices were below the average lower limit of the data but  from 2005 prices was increased drastically. Almost every quarter of the year till 2015 prices were above Upper average limit which was significantly dropped after 4th quarter of the year 2014.</run>
+            <run bold='true' fontsize='10'>&#10;Conclusion: </run>
+            <run fontsize='10'>Prices of the Europe Brent Crude oil was nearly constant through year 1986-2004. But after 2nd quarter of 2005 it was increased significantly till 2014. After 4th quarter of 2014 it was dramatically reduced to it&apos;s lowest price till date which is 451 Dollars per Barrel.</run>
+            <run bold='true' fontsize='10'>&#10;&#10;Source: </run>
+            <run auto-url='true' bold='true' hyperlink='tabdoc:load-url url=&amp;quot;http://www.eia.gov/dnav/pet/xls/pet_pri_spt_s1_d.xls&amp;quot;'>http://www.eia.gov/dnav/pet/xls/pet_pri_spt_s1_d.xls</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet2 (Oil Analysis Data)' name='excel-direct.42295.006379710649' />
+          </datasources>
+          <datasource-dependencies datasource='excel-direct.42295.006379710649'>
+            <column caption='Moving Range' datatype='real' name='[Calculation1]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='ABS(ZN(SUM([Europe Brent Spot Price FOB (Dollars per Barrel)])) - LOOKUP(ZN(SUM([Europe Brent Spot Price FOB (Dollars per Barrel)])), -1))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='MR_Signals' datatype='string' name='[Calculation_0441018011056681]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Moving Range Chart Signals Equation: &#13;&#10;IF  &#13;&#10;[Calculation1] &gt; 3.267*(WINDOW_AVG([Calculation1]))&#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&gt;LOOKUP([Calculation1],-1) AND  &#13;&#10;LOOKUP([Calculation1],-1)&gt;LOOKUP([Calculation1],-2)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-2)&gt;LOOKUP([Calculation1],-3)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-3)&gt;LOOKUP([Calculation1],-4)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-4)&gt;LOOKUP([Calculation1],-5)&#13;&#10;  AND &#13;&#10;LOOKUP([Calculation1],-5)&gt;LOOKUP([Calculation1],-6)&#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&lt;LOOKUP([Calculation1],-1) AND  &#13;&#10;LOOKUP([Calculation1],-1)&lt;LOOKUP([Calculation1],-2)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-2)&lt;LOOKUP([Calculation1],-3)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-3)&lt;LOOKUP([Calculation1],-4)&#13;&#10; AND  &#13;&#10;LOOKUP([Calculation1],-4)&lt;LOOKUP([Calculation1],-5)&#13;&#10; AND &#13;&#10;LOOKUP([Calculation1],-5)&lt;LOOKUP([Calculation1],-6)&#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&gt;WINDOW_AVG([Calculation1]) AND  &#13;&#10;LOOKUP([Calculation1],-1)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-2)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-3)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;LOOKUP([Calculation1],-4)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-5)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-6)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-7)&gt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-8)&gt;WINDOW_AVG([Calculation1]&#13;&#10;)  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;[Calculation1]&lt;WINDOW_AVG([Calculation1]) AND  &#13;&#10;LOOKUP([Calculation1],-1)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-2)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-3)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-4)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-5)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-6)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-7)&lt;WINDOW_AVG([Calculation1]&#13;&#10;) AND  &#13;&#10;LOOKUP([Calculation1],-8)&lt;WINDOW_AVG([Calculation1]&#13;&#10;)  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Signals' datatype='string' name='[Calculation_1611018005424789]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Individuals Chart Signals Equation: &#13;&#10;IF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;(WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]))+3*(WINDOW_AVG([Calculation1]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;(WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]))-&#13;&#10;3*(WINDOW_AVG([Calculation1]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&gt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&lt;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&gt;WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-7)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-8)&gt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])&lt;WINDOW_AVG(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-1)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-2)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-3)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-4)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-5)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-6)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-7)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Europe Brent Spot Price FOB (Dollars per Barrel)]),-8)&lt;WINDOW_AVG(Sum(&#13;&#10;[Europe Brent Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='UCL' datatype='real' name='[Calculation_2191018004454508]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Europe Brent Spot Price FOB (Dollars per Barrel)]) + 3*WINDOW_AVG([Calculation1]) / 1.128'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='MR_UCL' datatype='real' name='[Calculation_3291018004406993]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='3.267*WINDOW_AVG([Calculation1])'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='LCL' datatype='real' name='[Calculation_4131018004607477]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Europe Brent Spot Price FOB (Dollars per Barrel)]) - 3*WINDOW_AVG([Calculation1]) / 1.128'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal'>
+            </column>
+            <column datatype='real' name='[Europe Brent Spot Price FOB (Dollars per Barrel)]' role='measure' type='quantitative'>
+            </column>
+            <column-instance column='[Europe Brent Spot Price FOB (Dollars per Barrel)]' derivation='Sum' name='[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Quarter-Trunc' name='[tqr:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation1]' derivation='User' name='[usr:Calculation1:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_0441018011056681]' derivation='User' name='[usr:Calculation_0441018011056681:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation1]' ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_1611018005424789]' derivation='User' name='[usr:Calculation_1611018005424789:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation1]' ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_2191018004454508]' derivation='User' name='[usr:Calculation_2191018004454508:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation1]' ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_3291018004406993]' derivation='User' name='[usr:Calculation_3291018004406993:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation1]' ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_4131018004607477]' derivation='User' name='[usr:Calculation_4131018004607477:qk:1]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation1]' ordering-type='Rows' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='quantitative' column='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' included-values='non-null'>
+          </filter>
+          <filter class='quantitative' column='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' included-values='non-null'>
+          </filter>
+          <slices>
+            <column>[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]</column>
+            <column>[excel-direct.42295.006379710649].[usr:Calculation1:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
+            <encoding attr='space' class='1' field='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+            <format attr='line-pattern' id='refline0' value='dashed' />
+            <format attr='stroke-color' id='refline0' value='#26794a' />
+            <format attr='fill-above' id='refline1' value='#00000000' />
+            <format attr='fill-below' id='refline1' value='#00000000' />
+            <format attr='line-pattern' id='refline1' value='dashed' />
+            <format attr='stroke-color' id='refline1' value='#26794a' />
+            <format attr='fill-above' id='refline2' value='#00000000' />
+            <format attr='fill-below' id='refline2' value='#00000000' />
+            <format attr='line-pattern' id='refline2' value='dashed' />
+            <format attr='stroke-color' id='refline2' value='#820000' />
+            <format attr='fill-above' id='refline3' value='#00000000' />
+            <format attr='fill-below' id='refline3' value='#00000000' />
+            <format attr='line-pattern' id='refline3' value='dashed' />
+            <format attr='stroke-color' id='refline3' value='#820000' />
+            <format attr='fill-above' id='refline4' value='#00000000' />
+            <format attr='fill-below' id='refline4' value='#00000000' />
+            <format attr='line-pattern' id='refline4' value='dashed' />
+            <format attr='stroke-color' id='refline4' value='#820000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' />
+            </encodings>
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' formula='average' id='refline0' label='Avg Price = &lt;Value&gt;' label-type='custom' scope='per-pane' value-column='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' z-order='1' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' enable-instant-analytics='true' formula='average' id='refline1' label='Avg Moving Range = &lt;Value&gt;' label-type='custom' scope='per-pane' value-column='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' z-order='2' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' formula='average' id='refline2' label='Avg UCL Price = &lt;Value&gt;' label-type='custom' scope='per-pane' value-column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' z-order='3' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' formula='average' id='refline3' label='Avg LCL = &lt;Value&gt;' label-type='custom' scope='per-pane' value-column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' z-order='4' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' enable-instant-analytics='true' formula='average' id='refline4' label='Avg MR_UCL = &lt;Value&gt;' label-type='custom' scope='per-pane' value-column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' z-order='5' />
+          </pane>
+          <pane id='1' y-axis-name='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' />
+            </encodings>
+          </pane>
+          <pane id='2' y-axis-name='[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' />
+            </encodings>
+          </pane>
+          <pane id='3' y-axis-name='[excel-direct.42295.006379710649].[usr:Calculation1:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' />
+            </encodings>
+          </pane>
+          <pane id='4' y-axis-name='[excel-direct.42295.006379710649].[usr:Calculation1:qk]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[excel-direct.42295.006379710649].[usr:Calculation_0441018011056681:nk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]' />
+              <lod column='[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk] + ([excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk] + ([excel-direct.42295.006379710649].[usr:Calculation1:qk] + [excel-direct.42295.006379710649].[usr:Calculation1:qk])))</rows>
+        <cols>[excel-direct.42295.006379710649].[tqr:Date:qk]</cols>
+        <annotations>
+          <annotation class='point' id='0' mark-position='1' pullback='12' text-width='162'>
+            <formatted-text>
+              <run fontcolor='#787878'>Quarter of Date: </run>
+              <run bold='true'>&lt;[excel-direct.42295.006379710649].[tqr:Date:qk]&gt;</run>
+              <run fontcolor='#787878'>&#10;Europe Brent Spot Price FOB (Dollars per Barrel): </run>
+              <run bold='true'>&lt;[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]&gt;</run>
+              <run fontcolor='#787878'>&#10;Signals: </run>
+              <run bold='true'>&lt;[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]&gt;</run>
+              <run fontcolor='#787878'>&#10;UCL: </run>
+              <run bold='true'>&lt;[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]&gt;</run>
+              <run fontcolor='#787878'>&#10;LCL: </run>
+              <run bold='true'>&lt;[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]&gt;</run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor y-index='1'>
+                      <x-fields y-index='1'>
+                        <field>[excel-direct.42295.006379710649].[tqr:Date:qk]</field>
+                      </x-fields>
+                      <y-fields y-index='1'>
+                        <field>[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[excel-direct.42295.006379710649].[sum:Europe Brent Spot Price FOB (Dollars per Barrel):qk]</field>
+                      <field>[excel-direct.42295.006379710649].[tqr:Date:qk]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation1:qk]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation_0441018011056681:nk:1]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation_2191018004454508:qk:1]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation_3291018004406993:qk:1]</field>
+                      <field>[excel-direct.42295.006379710649].[usr:Calculation_4131018004607477:qk:1]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>450.57999999999998</value>
+                    <value>#2015-10-01 00:00:00#</value>
+                    <value>2828.3400000000001</value>
+                    <value>&quot;Outlier&quot;</value>
+                    <value>&quot;Outlier&quot;</value>
+                    <value>1369.8093938852137</value>
+                    <value>1129.1740336134453</value>
+                    <value>-468.64939388521367</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='-105' y='12' />
+          </annotation>
+        </annotations>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet2 (Oil Analysis Data)' name='excel-direct.42295.006379710649' />
+          </datasources>
+          <datasource-dependencies datasource='excel-direct.42295.006379710649'>
+            <column datatype='real' name='[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]' role='measure' type='quantitative'>
+            </column>
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal'>
+            </column>
+            <column-instance column='[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]' derivation='Sum' name='[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Month-Trunc' name='[tmn:Date:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline2' value='#00000000' />
+            <format attr='fill-below' id='refline2' value='#00000000' />
+            <format attr='line-pattern' id='refline2' value='dashed' />
+            <format attr='stroke-color' id='refline2' value='#26794a' />
+          </style-rule>
+          <style-rule element='refband'>
+            <format attr='reverse-palette' id='refline0' value='false' />
+            <format attr='line-pattern' id='refline0' value='dashed' />
+            <format attr='fill-color' id='refline0' value='#00000000' />
+            <format attr='reverse-palette' id='refline1' value='false' />
+            <format attr='line-pattern' id='refline1' value='dashed' />
+            <format attr='fill-color' id='refline1' value='#00000000' />
+            <format attr='stroke-color' id='refline0' value='#820000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' fill-above='false' fill-below='false' formula='stdev' id='refline0' label-type='automatic' scope='per-pane' symmetric='true' type='sample' value-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' z-order='1'>
+              <reference-line-value factor='-3' />
+              <reference-line-value factor='3' />
+            </reference-line>
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' formula='average' id='refline2' label-type='automatic' scope='per-pane' value-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' z-order='2' />
+          </pane>
+          <pane id='1' y-axis-name='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+          <pane id='2' y-axis-name='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+          </pane>
+        </panes>
+        <rows>([excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk] + [excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk])</rows>
+        <cols>[excel-direct.42295.006379710649].[tmn:Date:qk]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 3'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet2 (Oil Analysis Data)' name='excel-direct.42295.006379710649' />
+          </datasources>
+          <datasource-dependencies datasource='excel-direct.42295.006379710649'>
+            <column caption='Quick Moving Range' datatype='real' name='[Calculation2]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='ABS(ZN(SUM([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) - LOOKUP(ZN(SUM([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])), -1))'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Quick Signals' datatype='string' name='[Calculation_6751018185121103]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Individuals Chart Signals Equation: &#13;&#10;IF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;(WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))+3*(WINDOW_AVG([Calculation2]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;(WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))-&#13;&#10;3*(WINDOW_AVG([Calculation2]))/1.128)  &#13;&#10;THEN &apos;Outlier&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&gt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5) AND &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&lt;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6) &#13;&#10;THEN &apos;Trend&apos;  &#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&gt;WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-7)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-8)&gt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSEIF  &#13;&#10;Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])&lt;WINDOW_AVG(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-1)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-2)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-3)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-4)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-5)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-6)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-7)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)])) AND  &#13;&#10;LOOKUP(Sum([Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]),-8)&lt;WINDOW_AVG(Sum(&#13;&#10;[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]))  &#13;&#10;THEN &apos;Shift&apos;  &#13;&#10;ELSE &apos;In Range&apos;  &#13;&#10;END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='real' name='[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]' role='measure' type='quantitative'>
+            </column>
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal'>
+            </column>
+            <column-instance column='[Cushing, OK WTI Spot Price FOB (Dollars per Barrel)]' derivation='Sum' name='[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Month-Trunc' name='[tmn:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation2]' derivation='User' name='[usr:Calculation2:qk]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+            </column-instance>
+            <column-instance column='[Calculation_6751018185121103]' derivation='User' name='[usr:Calculation_6751018185121103:nk:1]' pivot='key' type='nominal'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[excel-direct.42295.006379710649].[Calculation2]' ordering-type='Rows' />
+            </column-instance>
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline2' value='#00000000' />
+            <format attr='fill-below' id='refline2' value='#00000000' />
+            <format attr='line-pattern' id='refline2' value='dashed' />
+            <format attr='stroke-color' id='refline2' value='#26794a' />
+          </style-rule>
+          <style-rule element='refband'>
+            <format attr='reverse-palette' id='refline0' value='false' />
+            <format attr='line-pattern' id='refline0' value='dashed' />
+            <format attr='fill-color' id='refline0' value='#00000000' />
+            <format attr='reverse-palette' id='refline1' value='false' />
+            <format attr='line-pattern' id='refline1' value='dashed' />
+            <format attr='fill-color' id='refline1' value='#00000000' />
+            <format attr='stroke-color' id='refline0' value='#820000' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[usr:Calculation2:qk]' enable-instant-analytics='true' fill-above='false' fill-below='false' formula='stdev' id='refline0' label-type='automatic' scope='per-pane' symmetric='true' type='sample' value-column='[excel-direct.42295.006379710649].[usr:Calculation2:qk]' z-order='1'>
+              <reference-line-value factor='-3' />
+              <reference-line-value factor='3' />
+            </reference-line>
+            <reference-line axis-column='[excel-direct.42295.006379710649].[usr:Calculation2:qk]' enable-instant-analytics='true' formula='average' id='refline2' label-type='automatic' scope='per-pane' value-column='[excel-direct.42295.006379710649].[usr:Calculation2:qk]' z-order='2' />
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' fill-above='false' fill-below='false' formula='stdev' id='refline3' label-type='automatic' scope='per-pane' symmetric='true' type='sample' value-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' z-order='3'>
+              <reference-line-value factor='-3' />
+              <reference-line-value factor='3' />
+            </reference-line>
+            <reference-line axis-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' enable-instant-analytics='true' formula='average' id='refline4' label-type='automatic' scope='per-pane' value-column='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' z-order='4' />
+          </pane>
+          <pane id='1' y-axis-name='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+          <pane id='2' y-axis-name='[excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk]' y-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[excel-direct.42295.006379710649].[usr:Calculation_6751018185121103:nk:1]' />
+            </encodings>
+          </pane>
+          <pane id='3' y-axis-name='[excel-direct.42295.006379710649].[usr:Calculation2:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>([excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk] + ([excel-direct.42295.006379710649].[sum:Cushing, OK WTI Spot Price FOB (Dollars per Barrel):qk] + [excel-direct.42295.006379710649].[usr:Calculation2:qk]))</rows>
+        <cols>[excel-direct.42295.006379710649].[tmn:Date:qk]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows show-side-pane='false'>
+    <window class='schema' source-height='-1' />
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]</field>
+          <field>[excel-direct.42295.006379710649].[yr:Date:ok]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='0' name='Sheet 3'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='2' param='[excel-direct.42295.006379710649].[usr:Calculation_6751018185121103:nk:1]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]</field>
+          <field>[excel-direct.42295.006379710649].[usr:Calculation_6751018185121103:nk:1]</field>
+          <field>[excel-direct.42295.006379710649].[yr:Date:ok]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+    <window auto-hidden='0' class='worksheet' maximized='1' name='Crude Oil Price Variation Control Chart'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='2' param='[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]' type='color' />
+            <card pane-specification-id='4' param='[excel-direct.42295.006379710649].[usr:Calculation_0441018011056681:nk:1]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <highlight>
+        <color-one-way>
+          <field>[excel-direct.42295.006379710649].[usr:Calculation_0441018011056681:nk:1]</field>
+          <field>[excel-direct.42295.006379710649].[usr:Calculation_1611018005424789:nk:1]</field>
+          <field>[excel-direct.42295.006379710649].[yr:Date:ok]</field>
+        </color-one-way>
+      </highlight>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      OyznXZjJ9HpxbfDokUg4397vMhjVGpm01zpkMns6u+z+/jZRwVzWbesYDBsVaMAZyUjR9jv8
+      S85fKhH0821iQgHR3r4uGy1jxHI4dHjQki3dt7eioCC1pt1Rmq2kaZqQiAyplpaeKp5DxQtK
+      nV3H7EFSLGdtNlvQ5tUadH3N1TKtRUb5+vqtHf0erVKqVobSM9IRj3iESIqSUERFeZlSolDK
+      RYdaugxSqisa6GnuNqTpAn5Xi4fViKljHa781NS+QadzaCgQ4USSbxjvOHF4nmfZcSOQfoet
+      cxwXi+p86kdjC4iPeA/Wdp9fmkVgA2IxOLxRnVZkc4TMZnVP72D6vCKSJAmCwHDc1ts1c/Y8
+      wHA64PbhhsWl2X02Z5C05Kl0EqUMZWYF3HZkzqFol8xoUYpJg07a1NKbp5VJuRSmukWdOfOy
+      4sLmXves2QVShU4jAW/QryhR67QyF43laMh2e3BJZpZUItXREalUqZLgGIaS1YphGJbEBjSJ
+      1nmex/Gx32s7sUsr5/dFJCJwBxidSuz0hIx61eCg25RiwjEIhUJb1q6lXa75d9wx70c/+seK
+      FQBgWbXqsueff3PFiojbrbZYbvz0049uu22gshIA7qqp2f/73ze++y4A/OCDD/oPHTq4aRMA
+      XPLMM5Rcvv2eewCg9Cc/mblu3eY1awAg77LLVj/99GulpWwkop858wdbt763YcNQQwNOUXcd
+      Pbrzl79s3bYNAG767LO2zz4re+45ALjshRc4hvnigQcAYMnDD1suuGDL1VcDQOF116164omX
+      iosBwDxv3rWbN7999dWejg6RSnX7wYOfP/BA51dfAcDGPXvq/vOfqldeAYCr3ngjaLfvevRR
+      AFj+m9+Y58zZesMNCKE5N9+8+MEHX1+0CADSlyy56rXX/n3JJYGBAbnJdOuuXZ/efXfvgQMA
+      cPvhw+UvvFD7r38BwLX/+Y+zuXnf448DwIW//70qM/Oj224DgKmWG0Jow4cfTqncFj/4YM7q
+      1W9fcQUAFKxbd9GTT748bx7iONOcOde99dY7117ram2l5PI7jhz54uGHOz7/HABu2bmz8d13
+      K196CQCufPXViNv91c9/jhBa/qtfpZaUvLd+PQAU3XDD+b/4xasLF55WQBMRCoVc9fUYQorU
+      VEVKiu3oUQCQaDT6goKBqiqeZUmJxDx37lBjI+33A0DaokXerq6gwwEApuJi2ufz9vQAgC4v
+      DyMIZ3MzAKjS06UGg72mBgCkOp0uL89aUYF4npLJTMXFg/X10UAAIZS5ZIm7vT3kdAKAee7c
+      sMvl6+sDAH1BAeJ5V1sbAKgzM8UazWBtLQDIjEZtTk5/WRkAiBQKY1GRvbaWDYdxgkgtKXG1
+      tobdbgBImT8/ODjot1oBwFBYyEWj7o4OANBYLJRC4aivZ1lWnZ6uysiI/bRilcpQWGirruai
+      UUIkSpk/39ncHPF6ASC1pMTf1xew2wHAWFTEhEKeri4A0ObkEBLJUGMjAEy13FiWTZs/f0rl
+      psrIkOp09mPHAEBmMGhzc63l5QghkVxunD17sLaWGS6EtrawyzWqEPQzZ/Is625v5zhOm5Mj
+      UakG6+oAQG4yqbOyrBUViQpIcKr/nlgXnOoFzhaCgAQSQhCQQEIIAhJICEFAAglxfCKR53mG
+      mdq7dmPXjzk7eVbhOO7cG43BsmyyJsGTaz32rrvTROeYaubEYvGou0KhkEwmO/XK8c7zPE/T
+      tFQqPau3jHee4ziWZWPfYpK3hMNhhUJx6nmWZXmeH3OMPdVcRaNRDMPGnKcYz/p4SdE0TRDE
+      mKFwppormqZFItGp7z+EROaBkgLHcZFI5Ay+i29K+P1+pVKZFNPJtR4KhUQi0ZhanGYCEvi2
+      QTz22GPJzsPp6WkstwbxlpqyQT/j7Gmu77JHnL11Hdb0tFQCP8sv4ER8xYF9pEJx5Ov9QRZv
+      qin3RAmTCt97uC47K+3smgZAHL17z345wX1dXk0RUFZWASRZXXYkgkmNWtVZNR322vYfOBzk
+      ydajB3ycpKu+fDCIG5VwoLzBkpk6fFlyYsVNES4S8bsDHqcv7LPVpSlJJysmAqzPG7YFi7PU
+      Y7TZZxKW9vj8ao8zyPLHKo8olQprfS3nMwVCgbNrFwAAIqGw3+8ddIgxNnSkokYuk1ZVVYhw
+      uau+flZu+lk1LVGZF82NNrS3h6lsX8NuSj2X6a4nIyqX66Qma1oM4wmtVo1TknSTVqPRsBiJ
+      c4w5Ix2XytTis782REl1ColIrjEoxKb0HLNepdHqgY/09du4sx9sVKrUSEjcYE4jAMstKFCK
+      sbTMPJNWrNMbz7bpkLt/x96jGdl54aEWkcbC+HpwkYJl+CGblR4Ra2969IE4luEQzkVDGCXB
+      eSbK42IC0SzIZdLx355+xmBoGqeocDAglsqjkSAplospgqbpMUdwZxw6EqEoMhAMKxSyYCAo
+      lSsioYBYqqDIs/vwcwztC4TEUhmwNCmRc3QYoyQSEUHTjHjEczs9BCTwrWVaNGECo0BBn49D
+      EPD7RzajPMdGwqFINO72injW4/VxHDM0OOjxB09cxkSZMxbwdVp0ogVGgXZ+9M8ZqzYe3Pra
+      pT/8oa3Xnm5W9Q641HioqqWHlxovXrUiTSttaqjHWV95F3P18vTdezt1snDh4hXdTY1yUcRK
+      680SJrNgtjHhIYhQA01L5Kkzhmp3EBpLQ22NjKK/2n0Q41mbKyyXy9MshrrKVggO9DU3t1g9
+      MwvyMABDamZBhqqn1zY00N7nZkP2zuauvtbO/sRzItRA0xHMnJIZdjvPyzbKJURbR/+cuUU6
+      jTasVuL2QZPZzIk4kBmUWlV2VjYukZFiMuyqbkfaIgsedKbqTSkRLR32eox6TeJZ+f9qyycL
+      oxYJLAAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='192' name='Sheet 3' width='192'>
+      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
+      x/r/AaXQ0gDTMTMcAAAAAElFTkSuQmCC
+    </thumbnail>
+    <thumbnail height='192' name='Crude Oil Price Variation Control Chart' width='192'>
+      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
+      KxSUKkaJ/wcSNc4ZR9L6vAAAAABJRU5ErkJggg==
+    </thumbnail>
+  </thumbnails>
+</workbook>
